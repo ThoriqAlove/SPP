@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+   <center>
     <h1>HALAMAN AWAL </h1>
+</center>
 </body>
 </html>

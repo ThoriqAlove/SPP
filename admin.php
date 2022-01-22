@@ -1,8 +1,22 @@
 <video id="background-video" autoplay loop muted >
-  <source src="video1.mp4" type="video/mp4">
+  <source src="lerep.mp4" type="video/mp4">
 </video>
 <?php
-include('koneksi.php');
+            session_start();
+            if (isset($_SESSION['status'])){
+            $nama = $_SESSION['nama'];
+            $jabatan = $_SESSION['jabatan'];
+            include('koneksi.php'); 
+?> 
+<center>
+          <?php
+          echo $_SESSION == ('petugas');
+          if (isset($_SESSION['login'])){
+            include('koneksi.php');
+            ?>
+</center>
+<?php
+          include('koneksi.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +50,7 @@ include('koneksi.php');
         <br>
         <br>
         <h1> PEMBAYARAN SPP</h1>
+        <h1> SMK TARUNA BANGSA </h1>
         </div>
     </div>
     <!--END HEADER--->
@@ -81,6 +96,7 @@ include('koneksi.php');
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <a href="?page=layout"><button class="btn btn-danger">Logout</button></a>
     </div>
   </div>
 </nav>
@@ -105,6 +121,14 @@ include('koneksi.php');
                 {
                     include('anggota-insert.php');
                 }
+                elseif($_GET['page']=="anggota-edit")
+                {
+                    include('anggota-edit.php');
+                }
+                elseif($_GET['page']=="anggota-edit-proses")
+                {
+                    include('anggota-edit-proses.php');
+                }
                 elseif($_GET['page'] == "petugas")
                 {
                     include('petugas.php');
@@ -113,11 +137,17 @@ include('koneksi.php');
                 {
                     include('buku.php');
                 }
-                else
+                elseif($_GET['page']=="logout")
+                {   
+                include('logout.php');    
+                }
+               else
                 {
-                    echo "<center><h1>WELCOME</H1></CENTER>";
+                    echo "<br><br><center><h1>WELCOME $nama</h1></center></br></br>";
+                    echo "<h1><center>SELAMAT DATANG $jabatan</center><h1>";
                 }
             }
+          
             ?>
         </div>
         <div class="col-8 ">
@@ -139,3 +169,14 @@ include('koneksi.php');
   <script src="bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<?php
+          }
+          else{
+            ?>
+            <script>
+              window.location.href='http://localhost/29_SPP_12rpl2/admin.php?page=anggota';
+            </script>
+          <?php
+          }
+        }
+        ?>

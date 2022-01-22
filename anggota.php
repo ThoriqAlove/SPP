@@ -1,5 +1,5 @@
 
-<center><h1 class="mt-4 mb-3">Data Siswa</h1></center>
+<center><h1 class="mt-4 mb-3">SPP SISWA 2022</h1></center>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 Tambah Data
@@ -20,15 +20,22 @@ Tambah Data
         <th>--Action--</th>
     </tr>
     <?php
-        $query = mysqli_query($konek,"SELECT * FROM anggota");
+        //$query = mysqli_query($konek,"SELECT * FROM anggota");
+        $query = mysqli_query($konek, "SELECT anggota.id_anggota, anggota.nis, anggota.nama, anggota.jk, anggota.tempat_lahir, 
+        anggota.tanggal_lahir, anggota.id_kelas, anggota.id_jurusan, anggota.no_telepon, anggota.alamat,
+        kelas.id_kelas, kelas.nama_kelas, jurusan.id_jurusan, jurusan.nama_jurusan 
+        FROM anggota
+        JOIN kelas ON anggota.id_kelas = kelas.id_kelas
+        JOIN jurusan ON anggota.id_jurusan = jurusan.id_jurusan");
         $no = 1;
         foreach ($query as $row) {
+      
     ?>
     <tr>
         <td class="table-info" valign="center" valign="middle"><?php echo $no; ?></td>
         <td class="table-info" valign="middle"><?php echo $row['nis']; ?></td>
         <td class="table-info" valign="middle"><?php echo $row['nama']; ?></td>
-        <td class="table-info" valign="middle"><?php echo $row['jk']; ?></td>
+        <td class="table-info" valign="middle"><?php echo $row['jk']=="L"?"Laki-Laki":"Perempuan"; ?></td>
         <td class="table-info" valign="middle"><?php echo $row['tempat_lahir']; ?></td>
         <td class="table-info" valign="middle"><?php echo $row['tanggal_lahir']; ?></td> 
         <td class="table-info" valign="middle"><?php echo $row['id_kelas']; ?></td>
@@ -37,9 +44,9 @@ Tambah Data
         <td class="table-info" valign="middle"><?php echo $row['alamat']; ?></td>
         <td class="table-info" valign="middle">
         <a href="?page=anggota-delete&delete&id=<?php echo $row['id_anggota']; ?>">
-            <button class="btn btn-danger" name="delete"><i class="fas fa-trash-alt"> Hapus</i></button>
+            <button class="btn btn-danger" name="delete"><i class="fas fa-trash-alt"> Hapus</i></button></a>
         <a href="?page=anggota-edit&edit&id=<?php echo $row['id_anggota']; ?>">
-            <button class="btn btn-warning" name="insert"><i class="fas fa-edit"></i>Update</button>
+            <button class="btn btn-warning" name="insert"><i class="fas fa-edit"></i>Update</button></a>
         </td>
     </tr>
     <?php
@@ -108,6 +115,7 @@ Tambah Data
             <div class="form-group mt-2">
              <textarea class="form-control" name="alamat" placeholder=" Alamat" require></textarea> 
            </div>
+           
             
                  
            

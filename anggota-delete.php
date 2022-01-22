@@ -9,7 +9,7 @@ if (isset($_GET['delete'])) {
            Data Berhasil Dihapus !!
         </div>
         <?php
-        header('refresh:2; url=http://localhost/29_sppoi_12rpl2/admin.php?page=anggota#');
+        header('refresh:2; url=http://localhost/29_SPP_12rpl2/admin.php?page=anggota');
     }
 }
 ?>
